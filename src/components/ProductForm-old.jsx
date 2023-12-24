@@ -1,36 +1,55 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 function ProductForm() {
+  // State variables for form inputs
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
 
-  function handleSubmit(event) {
-    event.preventDefault();
+  // Handle input changes
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
 
-    let newFormData = {
+  const handleImageChange = (e) => {
+    setImage(e.target.value);
+  };
+
+  const handlePriceChange = (e) => {
+    setPrice(e.target.value);
+  };
+
+  const handleDescriptionChange = (e) => {
+    setDescription(e.target.value);
+  };
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Create a JSON object with entered information
+    const formData = {
       name: name,
       image: image,
       price: price,
       description: description,
     };
+    // alert(JSON,stringify(formData));---****keep Object data
 
-    // alert(JSON.stringify(newFormData));
+    // You can now handle 'formData'
+    console.log(typeof formData);
+    console.log("Form Data as JSON:", formData);
+
+    // Display entered information using alert
     const alertMessage = `
       Name: ${name}
       Image: ${image}
       Price: ${price}
       Description: ${description}
     `;
+    console.log(typeof alertMessage);
     alert(alertMessage);
-
-    // initial input
-    setName("");
-    setImage("");
-    setPrice("");
-    setDescription("");
-  }
+  };
 
   return (
     <form className="post-form" onSubmit={handleSubmit}>
@@ -43,8 +62,8 @@ function ProductForm() {
             name="name"
             type="text"
             placeholder="Enter name here"
-            onChange={(event) => setName(event.target.value)}
             value={name}
+            onChange={handleNameChange}
           />
         </label>
       </div>
@@ -56,8 +75,8 @@ function ProductForm() {
             name="image"
             type="text"
             placeholder="Enter image url here"
-            onChange={(event) => setImage(event.target.value)}
             value={image}
+            onChange={handleImageChange}
           />
         </label>
       </div>
@@ -69,8 +88,8 @@ function ProductForm() {
             name="price"
             type="number"
             placeholder="Enter price here"
-            onChange={(event) => setPrice(event.target.value)}
             value={price}
+            onChange={handlePriceChange}
           />
         </label>
       </div>
@@ -82,8 +101,8 @@ function ProductForm() {
             name="description"
             type="text"
             placeholder="Enter description here"
-            onChange={(event) => setDescription(event.target.value)}
             value={description}
+            onChange={handleDescriptionChange}
             rows={4}
             cols={30}
           />
